@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You – Pawty Time</title>
+  <style>
+    :root{
+      --pine:#007866; --text:#004b3c; --bg:#fffdf7; --shadow:0 10px 40px rgba(0,0,0,.08);
+    }
+    body{
+      margin:0;font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background-color:var(--bg);
+      background-image:
+        radial-gradient(circle at top left, rgba(255,234,148,.6) 0%, transparent 70%),
+        radial-gradient(circle at bottom right, rgba(124,159,214,.45) 0%, transparent 70%),
+        radial-gradient(circle at top right, rgba(240,193,177,.5) 0%, transparent 60%);
+      background-size:400px 400px, 500px 500px, 300px 300px;
+      background-position:top left, bottom right, top right;
+      background-repeat:no-repeat;
+      min-height:100svh;display:flex;align-items:center;justify-content:center;
+      color:var(--text);text-align:center;overflow:hidden;position:relative;padding:24px;
+    }
+    .card{position:relative;z-index:2;max-width:760px;background:rgba(255,255,255,.95);
+      padding:2.4rem 2rem;border-radius:28px;box-shadow:var(--shadow)}
+    h1{font-size:clamp(1.8rem,3.5vw,2.6rem);margin:0 0 1rem;font-family:'DynaPuff',cursive}
+    p{font-size:clamp(1rem,2.2vw,1.1rem);color:#333;margin:0 0 1.4rem}
+    .emoji-circle{width:90px;height:90px;border-radius:50%;background:#e8f5f1;margin:0 auto 1.2rem;display:grid;place-items:center;font-size:46px}
+    .cta{display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .btn{padding:.82rem 1.4rem;border-radius:999px;border:none;background:var(--pine);color:#fff;font-weight:600;cursor:pointer}
+    .btn.alt{background:#1f8f77}
+    @media(max-width:640px){ .card{padding:1.8rem 1.2rem} }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji-circle">✅</div>
+    <h1>You're on the list! 🎉</h1>
+    <p id="personal">Thank you for signing up! We'll keep you posted on our launch and special perks. 💛</p>
+    <div class="cta">
+      <button class="btn" id="backBtn" title="Back to Home">Back to Home</button>
+      <button class="btn alt" id="shareBtn" title="Share the Pawty">Share with Friends</button>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    const params = new URLSearchParams(location.search);
+    const e = params.get('email');
+    if (e) document.getElementById('personal').textContent = `Thanks, ${e}. We'll keep you posted on the launch and perks!`;
+
+    document.getElementById('backBtn').addEventListener('click', ()=>{
+      location.href = 'index.html';
+    });
+
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.addEventListener('click', async ()=>{
+      const shareData = { title: 'Pawty Time', text: 'I just joined the Pawty Time launch list! 🐾🎉', url: location.origin + location.pathname.replace('thank-you','index') };
+      if (navigator.share) { try{ await navigator.share(shareData);}catch(_){} }
+      else {
+        try { await navigator.clipboard.writeText(shareData.url); shareBtn.textContent='Link Copied!'; setTimeout(()=>shareBtn.textContent='Share with Friends',1600);} catch(_){ }
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
