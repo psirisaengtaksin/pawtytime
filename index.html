@@ -5,151 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pawty Time - Coming Soon</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=DynaPuff:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    body{
+    :root{
+      --pine:#007866;
+      --vista:#7C9FD6;
+      --dogwood:#F0C1B1;
+      --jasmine:#FFFBEA;
+      --ink:#004b3c;
+      --body:#333;
+      --radius:20px;
+      --shadow:0 4px 10px rgba(0,0,0,.05);
+      --content-w:980px;
+    }
+    *{box-sizing:border-box;}
+    html,body{
       margin:0;
+      height:100%;
+      min-height:100vh;
       font-family:'Roboto',sans-serif;
-      background-color:#fffdf7;
-      background-image:
-        radial-gradient(circle at top left, rgba(255, 234, 148, 0.6) 0%, transparent 70%),
-        radial-gradient(circle at bottom right, rgba(124, 159, 214, 0.6) 0%, transparent 70%),
-        radial-gradient(circle at top right, rgba(240, 193, 177, 0.5) 0%, transparent 60%);
-      background-size:400px 400px, 500px 500px, 300px 300px;
-      background-position:top left, bottom right, top right;
-      background-repeat:no-repeat;
-      min-height:100svh;
-      color:#004b3c;
-      text-align:center;
+      color:var(--ink);
       overflow-x:hidden;
-      overflow-y:auto;
       position:relative;
-      padding:24px;
+      background: linear-gradient(180deg, rgba(255, 250, 240, 0.9) 0%, rgba(255, 248, 220, 0.8) 40%, rgba(255, 245, 230, 0.9) 100%),
+                  radial-gradient(circle at top left, rgba(255, 239, 184, 0.7) 0%, transparent 70%),
+                  radial-gradient(circle at bottom right, rgba(255, 244, 200, 0.4) 0%, transparent 70%),
+                  radial-gradient(circle at top right, rgba(240, 193, 177, 0.4) 0%, transparent 60%);
+      background-size:cover, 400px 400px, 500px 500px, 300px 300px;
+      background-position:center, top left, bottom right, top right;
+      background-repeat:no-repeat;
+      scroll-behavior:smooth;
     }
-    header{
-      position:absolute;top:0;left:0;right:0;height:70px;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 40px;
-      background:rgba(255,255,255,0.8);backdrop-filter:blur(6px);
-      box-shadow:0 2px 6px rgba(0,0,0,.05);
-      z-index:1000;
-    }
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+
+    /* Ensure anchored sections aren't hidden behind sticky header */
+    main, section.box-section{ scroll-margin-top: 84px; }
+
+    header{position:sticky;top:0;left:0;right:0;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(255,255,255,0.9);backdrop-filter:blur(6px);box-shadow:0 1px 0 rgba(0,0,0,.08);z-index:1000;}
     .logo img{height:40px;}
 
     nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;}
-    nav a{text-decoration:none;color:#004b3c;font-weight:500;transition:color .2s ease;font-family:'Roboto',sans-serif;}
-    nav a:hover{color:#007866;}
+    nav a{text-decoration:none;color:var(--ink);font-weight:500;transition:color .2s ease;}
+    nav a:hover,nav a:focus{color:var(--vista);}
 
-    .menu-toggle{
-      display:none;
-      flex-direction:column;
-      cursor:pointer;
-      gap:6px;
-      position:absolute;
-      right:20px;
-      top:50%;
-      transform:translateY(-50%);
-    }
-    .menu-toggle span{
-      width:28px;
-      height:3px;
-      background:#004b3c;
-      border-radius:2px;
-      transition:transform 0.3s ease, opacity 0.3s ease;
-    }
-    /* Improved Hamburger -> X animation */
-    .menu-toggle.open span:nth-child(1){
-      transform:translateY(9px) rotate(45deg);
-    }
-    .menu-toggle.open span:nth-child(2){
-      opacity:0;
-    }
-    .menu-toggle.open span:nth-child(3){
-      transform:translateY(-9px) rotate(-45deg);
-    }
+    .menu-toggle{display:none;flex-direction:column;cursor:pointer;gap:6px;position:absolute;right:16px;top:50%;transform:translateY(-50%);}
+    .menu-toggle span{width:28px;height:3px;background:var(--ink);border-radius:2px;transition:transform .28s ease, opacity .28s ease;}
+    .menu-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+    .menu-toggle.open span:nth-child(2){opacity:0;}
+    .menu-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
 
-    main{margin-top:120px;}
-    h1, h2 {font-family:'DynaPuff', cursive;}
-    h1{font-size:3rem;margin:.25rem 0 1rem}
-    p{font-size:1.2rem;color:#333;margin:0 0 2rem;}
+    main{padding:32px 16px 0;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;min-height:100vh;}
+    .subscribe-box{position:relative;width:100%;max-width:var(--content-w);margin:32px auto 56px;}
+    .subscribe-box::before{content:"";position:absolute;right:-28px;bottom:-28px;width:260px;height:260px;border-radius:40% 60% 55% 45%/55% 45% 60% 40%;background:var(--jasmine);opacity:.4;z-index:-2;filter:blur(2px);}
+    .subscribe-inner{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;border-top:4px solid var(--vista);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
 
-    .subscribe-box {width:100%;max-width:980px;margin:0 auto 60px;text-align:center;}
-    .subscribe-inner {
-      background:rgba(255,255,255,.9);
-      border-radius:20px;
-      box-shadow:0 4px 10px rgba(0,0,0,.05);
-      padding:20px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .subscribe-inner form {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      flex-wrap:nowrap;
-      width:100%;
-      max-width:600px;
-    }
-    /* Desktop: button smaller than input */
-    .subscribe-inner form input[type="email"]{flex:1;min-width:0;}
-    .subscribe-inner form button{flex:0 0 auto;padding:.8rem 1.25rem;}
+    h1,h2{font-family:'DynaPuff',cursive;text-align:center;}
+    h1{font-size:3rem;margin:.25rem 0 12px;}
+    .lead{font-size:1.15rem;color:var(--body);margin:0 0 18px;text-align:center;}
 
-    input, textarea, button{font-family:'Roboto',sans-serif;font-size:1rem;}
-    input[type="email"], input[type="text"], textarea{
-      padding:.8rem 1rem;border-radius:14px;border:2px solid #007866;outline:none;color:#333;flex:1;min-width:0;box-sizing:border-box;
-    }
-    textarea{resize:vertical;width:100%;}
-    button{
-      border-radius:14px;border:none;background:#007866;color:#fff;font-size:1rem;cursor:pointer;white-space:nowrap;
-    }
-    button:hover{background:#005c4e}
+    .subscribe-inner form{display:flex;gap:10px;align-items:center;max-width:720px;justify-content:center;}
+    .subscribe-inner input[type="email"]{flex:1;padding:.85rem 1rem;border:2px solid var(--dogwood);border-radius:14px;max-width:400px;}
+    .subscribe-inner button{padding:.9rem 1.25rem;border:none;border-radius:14px;background:var(--vista);color:#fff;cursor:pointer;}
+    .subscribe-inner button:hover,.subscribe-inner button:focus{background:var(--pine);}
 
-    section.box-section{width:100%;max-width:980px;margin:60px auto 80px;text-align:left;}
-    section.box-section h2{margin:0 0 12px;}
-    section.box-section .content-box{background:rgba(255,255,255,.9);border-radius:20px;box-shadow:0 4px 10px rgba(0,0,0,.05);padding:20px;}
-    #contact-form input, #contact-form textarea, #contact-form button{width:100%;display:block;}
-    #contact-form button{padding:.8rem 1rem;}
+    section.box-section{width:100%;max-width:var(--content-w);margin:56px auto;text-align:left;padding:0 16px;min-height:60vh;}
+    section.box-section h2{margin:0 0 12px;color:var(--vista);}
+    .content-box{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;border-left:4px solid var(--dogwood);}
+
+    #contact-form{display:flex;flex-direction:column;gap:24px;}
+    #contact-form .panel{background:#fff;padding:20px;border-radius:14px;box-shadow:inset 0 1px 3px rgba(0,0,0,.05);border:2px solid var(--dogwood);display:flex;flex-direction:column;gap:20px;}
+    #contact-form input,#contact-form textarea{width:100%;padding:.8rem 1rem;border:2px solid var(--dogwood);border-radius:14px;font-size:1rem;outline:none;margin-bottom:8px;}
+    #contact-form textarea{resize:vertical;}
+    #contact-form button{width:100%;padding:.9rem 1rem;border-radius:14px;border:none;background:var(--vista);color:#fff;}
+
+    footer{background:rgba(255,255,255,0.9);padding:30px 0;margin-top:60px;border-top:3px solid var(--dogwood);text-align:center;color:var(--ink);}
+    .social-icons a{margin:0 10px;color:var(--vista);font-size:1.5rem;transition:color .2s ease, transform .2s ease;}
+    .social-icons a:hover{color:var(--pine);transform:scale(1.05);}
 
     @media(max-width:768px){
       .menu-toggle{display:flex;}
-      nav ul{display:none;flex-direction:column;gap:10px;background:rgba(255,255,255,0.95);position:absolute;top:70px;right:0;width:200px;padding:15px;border-radius:0 0 10px 10px;box-shadow:0 2px 10px rgba(0,0,0,.1);} 
-      nav ul.show{display:flex;}
-      .subscribe-inner form{flex-direction:column;gap:10px;}
-      .subscribe-inner form input[type="email"], .subscribe-inner form button{width:100%;}
+      nav ul{display:flex;flex-direction:column;gap:10px;background:rgba(255,255,255,0.98);position:absolute;top:70px;right:0;width:220px;padding:0 15px;border-radius:0 0 10px 10px;box-shadow:0 2px 10px rgba(0,0,0,.12);max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease, opacity .3s ease, padding .3s ease;}
+      nav ul.show{max-height:400px;opacity:1;padding:15px;}
+      .subscribe-inner form{flex-direction:column;}
+      .subscribe-inner input[type="email"],.subscribe-inner button{width:100%;}
+      h1{font-size:2.2rem;text-align:center;display:flex;justify-content:center;align-items:center;}
     }
-    @media(max-width:640px){body{padding:16px;}h1{font-size:2rem;}p{font-size:1rem;}}
+
+    @media(max-width:640px){h1{font-size:2rem;text-align:center;}}
   </style>
 </head>
 <body>
   <header>
-    <a href="#" class="logo" aria-label="Pawty Time home">
+    <a href="#top" class="logo" aria-label="Pawty Time home">
       <img src="Logo/LOGO_Pawty time_text_Final-01.png" alt="Pawty Time Logo" />
     </a>
-    <div class="menu-toggle" id="menu-toggle">
+    <div class="menu-toggle" id="menu-toggle" role="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
       <span></span><span></span><span></span>
     </div>
     <nav>
       <ul id="nav-menu">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="#top">Home</a></li>
         <li><a href="#about">About Us</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <h1>🐾 Pawty's About to Begin 🐾</h1>
-    <p>Be the first to get updates from Pawty Time! Sign up below to stay in the loop. 🎉</p>
-    <div class="subscribe-box">
+  <main id="top">
+    <section class="subscribe-box">
       <div class="subscribe-inner">
+        <h1>🐾 Pawty's About to Begin 🐾</h1>
+        <p class="lead">Be the first to get updates from Pawty Time! Sign up below to stay in the loop. 🎉</p>
         <form id="notify-form" novalidate>
           <input id="email" type="email" placeholder="Enter your email" required />
           <button type="submit">Notify Me</button>
         </form>
       </div>
-    </div>
+    </section>
   </main>
 
   <section id="about" class="box-section">
@@ -166,72 +137,51 @@
     <h2>Contact</h2>
     <div class="content-box">
       <p>Prefer email? Reach us at 
-        <a href="mailto:contact@pawtytimeth.com" style="color:#007866;font-weight:600;text-decoration:none;">contact@pawtytimeth.com</a>
+        <a href="mailto:contact@pawtytimeth.com" style="color:var(--vista);font-weight:600;text-decoration:none;">contact@pawtytimeth.com</a>
       </p>
-      <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:12px;">
-        <div style="background:rgba(255,255,255,1);padding:20px;border-radius:14px;box-shadow:inset 0 1px 3px rgba(0,0,0,0.05);">
-          <input type="text" name="name" placeholder="Your name" required style="margin-bottom:10px;padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none;width:100%;box-sizing:border-box;" />
-          <input type="email" name="email" placeholder="Your email" required style="margin-bottom:10px;padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none;width:100%;box-sizing:border-box;" />
-          <textarea name="message" rows="5" placeholder="Your message" required style="padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none;width:100%;box-sizing:border-box;resize:vertical"></textarea>
+      <form id="contact-form" novalidate>
+        <div class="panel">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea name="message" rows="5" placeholder="Your message" required></textarea>
         </div>
-        <button type="submit" style="padding:.8rem 1.5rem;border-radius:14px;border:none;background:#007866;color:#fff;font-size:1rem;cursor:pointer;width:100%;">Send Message</button>
+        <button type="submit">Send Message</button>
       </form>
-      <p id="contact-status" style="margin-top:10px;color:#007866;display:none;">Thanks! Your message has been noted.</p>
+      <p id="contact-status" style="margin-top:10px;color:var(--vista);display:none;">Thanks! Your message has been noted.</p>
     </div>
   </section>
 
+  <footer>
+    <div class="social-icons">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p style="margin:5px 0;font-size:0.95rem;">© 2025 Pawty Time. All rights reserved.</p>
+    <p style="margin:0;font-size:0.9rem;color:var(--body);">Made with 🐾 and love for every tail-wagging moment!</p>
+  </footer>
+
   <script>
-  (function(){
-    const menuToggle=document.getElementById('menu-toggle');
-    const navMenu=document.getElementById('nav-menu');
-    menuToggle.addEventListener('click',()=>{
-      navMenu.classList.toggle('show');
-      menuToggle.classList.toggle('open');
-    });
+    (function(){
+      const menuToggle = document.getElementById('menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
 
-    const form=document.querySelector('#notify-form');
-    const emailInput=form?form.querySelector('input[type="email"]'):null;
-    function isValidEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);}
+      if(menuToggle && navMenu){
+        menuToggle.addEventListener('click', ()=>{
+          const isOpen = menuToggle.classList.toggle('open');
+          navMenu.classList.toggle('show');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
 
-    if(form&&emailInput){
-      form.addEventListener('submit',function(e){
-        e.preventDefault();
-        const email=(emailInput.value||'').trim();
-        if(!isValidEmail(email)){emailInput.focus();return;}
-        window.location.href=`thank-you.html?email=${encodeURIComponent(email)}`;
-      });
-    }
-
-    const cForm=document.getElementById('contact-form');
-    const cStatus=document.getElementById('contact-status');
-    if(cForm){
-      cForm.addEventListener('submit',function(e){
-        e.preventDefault();
-        cStatus.style.display='block';
-        cStatus.textContent='Thanks! Your message has been sent.';
-        cForm.reset();
-      });
-    }
-
-    const header=document.querySelector('header');
-    const headerH=(header&&header.offsetHeight)?header.offsetHeight:0;
-    document.querySelectorAll('a[href^="#"]').forEach(function(link){
-      link.addEventListener('click',function(e){
-        const id=this.getAttribute('href').slice(1);
-        const target=document.getElementById(id);
-        if(!target)return;
-        e.preventDefault();
-        const y=target.getBoundingClientRect().top+window.pageYOffset-(headerH+20);
-        window.scrollTo({top:y,behavior:'smooth'});
-        navMenu.classList.remove('show');
-        menuToggle.classList.remove('open');
-      });
-    });
-  })();
+        navMenu.querySelectorAll('a').forEach(a=>{
+          a.addEventListener('click', ()=>{
+            navMenu.classList.remove('show');
+            menuToggle.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded','false');
+          });
+        });
+      }
+    })();
   </script>
 </body>
 </html>
-
-
-
-
