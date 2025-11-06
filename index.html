@@ -17,7 +17,6 @@
       background-position:top left, bottom right, top right;
       background-repeat:no-repeat;
       min-height:100svh;
-      /* Allow page to scroll; avoid flex centering that traps sections */
       display:block;
       color:#004b3c;
       text-align:center;
@@ -42,18 +41,68 @@
     nav a{text-decoration:none;color:#004b3c;font-weight:500;transition:color .2s ease;}
     nav a:hover{color:#007866;}
 
-    main{margin-top:100px;}
+    main{margin-top:120px;}
     h1{font-size:3rem;font-family:'DynaPuff', cursive;margin:.25rem 0 1rem}
     p{font-size:1.2rem;color:#333;margin:0 0 2rem}
-    form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.9);padding:1rem 1.5rem;border-radius:50px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-    input[type="email"]{padding:.8rem 1rem;border-radius:50px;border:2px solid #007866;width:min(320px,80vw);font-size:1rem;outline:none}
-    button{padding:.8rem 1.5rem;border-radius:50px;border:none;background:#007866;color:#fff;font-size:1rem;cursor:pointer}
+
+    .subscribe-box {
+      width:100%;
+      max-width:980px;
+      margin:0 auto;
+      background:rgba(255,255,255,.9);
+      border-radius:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,.05);
+      padding:20px;
+    }
+    .subscribe-box form {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      background:transparent;
+      box-shadow:none;
+      padding:0;
+      border-radius:20px;
+    }
+    input[type="email"]{
+      padding:.8rem 1rem;
+      border-radius:14px;
+      border:2px solid #007866;
+      width:min(320px,80vw);
+      font-size:1rem;
+      outline:none;
+    }
+    button{
+      padding:.8rem 1.5rem;
+      border-radius:14px;
+      border:none;
+      background:#007866;
+      color:#fff;
+      font-size:1rem;
+      cursor:pointer;
+    }
     button:hover{background:#005c4e}
+
+    section.box-section {
+      width:100%;
+      max-width:980px;
+      margin:60px auto 80px;
+      text-align:left;
+    }
+    section.box-section h2{
+      font-family:'DynaPuff', cursive;
+      margin:0 0 12px;
+    }
+    section.box-section .content-box{
+      background:rgba(255,255,255,.9);
+      border-radius:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,.05);
+      padding:20px;
+    }
 
     @media(max-width:768px){ header{padding:0 20px;} nav ul{gap:16px;} }
     @media(max-width:640px){
       body{padding:16px;}
-      form{flex-direction:column;gap:8px;align-items:stretch;padding:.8rem 1rem;border-radius:28px;}
       input[type="email"], button{width:100%;}
       h1{font-size:2rem;}
       p{font-size:1rem;}
@@ -79,32 +128,40 @@
   <main>
     <h1>🐾 Pawty's About to Begin 🐾</h1>
     <p>Be the first to get updates from Pawty Time! Sign up below to stay in the loop. 🎉</p>
-    <form id="notify-form" novalidate>
-      <input id="email" type="email" placeholder="Enter your email" required />
-      <button type="submit">Notify Me</button>
-    </form>
+    <div class="subscribe-box">
+      <form id="notify-form" novalidate>
+        <input id="email" type="email" placeholder="Enter your email" required />
+        <button type="submit">Notify Me</button>
+      </form>
+    </div>
   </main>
 
   <!-- About Us section (empty content for now) -->
-  <section id="about" style="width:100%;max-width:980px;margin:60px auto 24px;text-align:left">
-    <h2 style="font-family:'DynaPuff', cursive;margin:0 0 12px">About Us</h2>
-    <div style="background:rgba(255,255,255,.9);border-radius:20px;box-shadow:0 4px 10px rgba(0,0,0,.05);padding:18px 20px;min-height:120px">
-      <!-- Add your brand story here -->
+  <section id="about" class="box-section">
+    <h2>About Us</h2>
+    <div class="content-box">
+      At Pawty Time, we believe every day is worth celebrating — especially with our furry best friends! 🎉🐶
+
+Born from the simple joy of wagging tails and happy paws, Pawty Time is all about turning ordinary moments into little adventures. Whether it’s a walk in the park, a cozy nap, or a silly zoomie session, we’re here to make it feel like a pawty!
+
+Our world is colorful, fun, and full of love — just like the pets who inspire us. Because life’s better when you live it with paws, smiles, and a touch of sparkle. ✨
+
+So grab your leash, your best friend, and let’s make every moment a Pawty Time! 💛
     </div>
   </section>
 
   <!-- Contact section with form + email -->
-  <section id="contact" style="width:100%;max-width:980px;margin:24px auto 80px;text-align:left">
-    <h2 style="font-family:'DynaPuff', cursive;margin:0 0 12px">Contact</h2>
-    <div style="background:rgba(255,255,255,.9);border-radius:20px;box-shadow:0 4px 10px rgba(0,0,0,.05);padding:20px">
+  <section id="contact" class="box-section">
+    <h2>Contact</h2>
+    <div class="content-box">
       <p style="margin:0 0 12px;color:#333">Prefer email? Reach us at 
         <a href="mailto:contact@pawtytimeth.com" style="color:#007866;font-weight:600;text-decoration:none">contact@pawtytimeth.com</a>
       </p>
-      <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:12px;background:transparent;box-shadow:none;padding:0;border-radius:0">
+      <form id="contact-form" novalidate style="display:flex;flex-direction:column;gap:12px;">
         <input type="text" name="name" placeholder="Your name" required style="padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none" />
         <input type="email" name="email" placeholder="Your email" required style="padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none" />
         <textarea name="message" rows="5" placeholder="Your message" required style="padding:.8rem 1rem;border:2px solid #007866;border-radius:14px;font-size:1rem;outline:none;resize:vertical"></textarea>
-        <button type="submit" style="align-self:flex-start;padding:.8rem 1.5rem;border-radius:50px;border:none;background:#007866;color:#fff;font-size:1rem;cursor:pointer">Send Message</button>
+        <button type="submit" style="align-self:flex-start;padding:.8rem 1.5rem;border-radius:14px;border:none;background:#007866;color:#fff;font-size:1rem;cursor:pointer">Send Message</button>
       </form>
       <p id="contact-status" style="margin-top:10px;color:#007866;display:none">Thanks! Your message has been noted.</p>
     </div>
@@ -112,7 +169,6 @@
 
   <script>
   (function () {
-    // ======= Email notify form =======
     const form = document.querySelector('#notify-form');
     const emailInput = form ? form.querySelector('input[type="email"]') : null;
     function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
@@ -122,25 +178,21 @@
         e.preventDefault();
         const email = (emailInput.value || '').trim();
         if (!isValidEmail(email)) { emailInput.focus(); return; }
-        // redirect to thank-you page
         window.location.href = `thank-you.html?email=${encodeURIComponent(email)}`;
       });
     }
 
-    // ======= Contact form (placeholder handler) =======
     const cForm = document.getElementById('contact-form');
     const cStatus = document.getElementById('contact-status');
     if (cForm) {
       cForm.addEventListener('submit', function(e){
         e.preventDefault();
-        // TODO: Replace with real submission (e.g., Apps Script/Mailchimp/Airtable/EmailJS)
         cStatus.style.display = 'block';
         cStatus.textContent = 'Thanks! Your message has been sent.';
         cForm.reset();
       });
     }
 
-    // ======= Smooth scroll for in-page links (#about, #contact) =======
     const header = document.querySelector('header');
     const headerH = (header && header.offsetHeight) ? header.offsetHeight : 0;
     document.querySelectorAll('a[href^="#"]').forEach(function(link){
@@ -153,15 +205,10 @@
         window.scrollTo({ top: y, behavior: 'smooth' });
       });
     });
-
-    // ======= Lightweight self-tests (console only) =======
-    try {
-      console.assert(!!document.querySelector('header'), 'Header should exist');
-      console.assert(!!document.getElementById('about'), '#about section should exist');
-      console.assert(!!document.getElementById('contact'), '#contact section should exist');
-    } catch(_) { /* no-op */ }
   })();
   </script>
 </body>
 </html>
+
+
 
